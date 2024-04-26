@@ -1,4 +1,5 @@
 pub mod types;
+pub mod dummy;
 
 fn main() {
     println!("Hello, world!");
