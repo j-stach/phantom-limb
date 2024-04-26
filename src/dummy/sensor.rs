@@ -9,8 +9,9 @@ use crate::types::{ Sensor, NeuronId };
 // TODO: Logging, errors
 pub async fn white_noise(run: &bool, remote: SocketAddr, nids: Vec<NeuronId>)
 -> Result<(), anyhow::Error> {
+    let ip = "127.0.0.1".parse::<std::net::IpAddr>().expect("Parse localhost address");
 
-    let mut sensor = Sensor::<u8>::new(SocketAddr::new(super::IP, 0)).await?;
+    let mut sensor = Sensor::<u8>::new(SocketAddr::new(ip, 0)).await?;
     let mut count = 0u8;
     for nid in nids {
         sensor.add_receptor(count, nid);

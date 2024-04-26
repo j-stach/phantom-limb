@@ -1,7 +1,7 @@
 
 use std::net::SocketAddr;
-
 use crate::types::{ Motor, NeuronId };
+
 
 /// Sink for behavioral output that prints nerve activation sequence to STDOUT.
 pub async fn read_and_weep(run: &bool, address: SocketAddr, nids: Vec<NeuronId>)

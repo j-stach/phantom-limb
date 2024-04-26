@@ -1,8 +1,9 @@
-pub mod types;
-pub mod dummy;
 
 fn main() {
     println!("Hello, world!");
+
+    let args: Vec<String> = std::env::args().collect();
+
 }
 // CLI tool for hello worlding sensor/motors together
 // - sensor port connect, neuronids, random fuzzing of those ids
