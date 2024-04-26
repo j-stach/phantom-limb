@@ -1,7 +1,8 @@
 
 # Phantom Limb
 
-*"So we just skirt the hallway sides, a phantom and a fly; Follow the lines and wonder why there's no connection."* -- The Shins
+*"So we just skirt the hallway sides, a phantom and a fly; Follow the lines and wonder why there's no connection."* <br>
+-- The Shins
 
 Crate for simulating sensor inputs and reading behavioral outputs for bionic neural networks. <br>
 Use this tool as an example for building signal interfaces with Cajal.
