@@ -1,8 +1,8 @@
 
 fn main() {
-    println!("Hello, world!");
+    let _args: Vec<String> = std::env::args().collect();
 
-    let args: Vec<String> = std::env::args().collect();
+    todo!{"The phantom-limb executable is unfinished. Please use the library instead."}
 
 }
 // CLI tool for hello worlding sensor/motors together

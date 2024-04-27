@@ -3,27 +3,27 @@ use std::net::SocketAddr;
 use tokio::net::UdpSocket;
 use std::collections::HashMap;
 use std::hash::Hash;
-use serde::{ Serialize, Deserialize };
 
+pub use cajal::neuron::NeuronId;
 
-/// Corresponds to the NeuronId from cajal. In the future, just re-export cajal's.
-#[derive(Clone, Serialize, Deserialize, Hash, Eq, PartialEq)]
-pub struct NeuronId {
-    structure: String,
-    cluster: (usize, usize),
-    neuron: (usize, usize)
-}
-impl std::fmt::Display for NeuronId {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}/{}:{}/{}:{}",
-            self.structure,
-            self.cluster.0,
-            self.cluster.1,
-            self.neuron.0,
-            self.neuron.1,
-        )
-    }
-}
+// /// Corresponds to the NeuronId from cajal. In the future, just re-export cajal's.
+// #[derive(Clone, Serialize, Deserialize, Hash, Eq, PartialEq)]
+// pub struct NeuronId {
+//     structure: String,
+//     cluster: (usize, usize),
+//     neuron: (usize, usize)
+// }
+// impl std::fmt::Display for NeuronId {
+//     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+//         write!(f, "{}/{}:{}/{}:{}",
+//             self.structure,
+//             self.cluster.0,
+//             self.cluster.1,
+//             self.neuron.0,
+//             self.neuron.1,
+//         )
+//     }
+// }
 
 
 /// Sends some data as a NeuronId to trigger a Complex's Inputs.
