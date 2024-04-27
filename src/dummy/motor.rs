@@ -1,10 +1,9 @@
 
-use std::net::SocketAddr;
 use crate::types::{ Motor, NeuronId };
 
 
 /// Sink for behavioral output that prints nervous activation sequence to STDOUT.
-pub async fn read_and_weep(run: &bool, address: SocketAddr, nids: Vec<NeuronId>)
+pub async fn read_and_weep(duration: std::time::Duration, address: std::net::SocketAddr, nids: Vec<NeuronId>)
 -> Result<(), anyhow::Error> {
     let mut motor = Motor::new(address).await?;
     for nid in nids {
@@ -22,7 +21,7 @@ pub async fn read_and_weep(run: &bool, address: SocketAddr, nids: Vec<NeuronId>)
 
     let mut buffer = vec![0; 100];
     let start = std::time::Instant::now();
-    while *run {
+    while start.elapsed() < duration {
         if let Err(error) = motor.recv_impulse(&mut buffer).await {
             println!("Whoops! Impulse not recognized\n{:?}", error)
         }

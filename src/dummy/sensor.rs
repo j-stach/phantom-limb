@@ -7,7 +7,7 @@ use crate::types::{ Sensor, NeuronId };
 
 /// Tests the connectivity of up to 256 input channels.
 // TODO: Logging, errors
-pub async fn white_noise(run: &bool, remote: SocketAddr, nids: Vec<NeuronId>)
+pub async fn white_noise(duration: std::time::Duration, remote: SocketAddr, nids: Vec<NeuronId>)
 -> Result<(), anyhow::Error> {
     let ip = "127.0.0.1".parse::<std::net::IpAddr>().expect("Parse localhost address");
 
@@ -22,10 +22,11 @@ pub async fn white_noise(run: &bool, remote: SocketAddr, nids: Vec<NeuronId>)
     // TODO: Logging, errors
     println!("Sending white noise from {} to {} with {} signal paths",
              sensor.address, &remote, count - 1);
+
+    let mut sensory_environment = rand::thread_rng();
     let start = std::time::Instant::now();
 
-    while *run {
-        let mut sensory_environment = rand::thread_rng();
+    while start.elapsed() < duration {
         let stimulus: u8 = sensory_environment.gen_range(0..count);
         if let Err(error) = sensor.send_impulse(&stimulus).await {
             // TODO: Logging, errors
