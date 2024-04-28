@@ -2,6 +2,9 @@
 use thiserror::Error;
 use std::fmt::{ Display, Error, Formatter };
 
+// TODO: Clarify expected format for misparsed strings
+
+
 #[derive(Error, Debug)]
 pub enum ArgError {
     Bad(#[from] BadArg),
