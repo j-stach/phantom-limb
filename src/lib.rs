@@ -8,3 +8,5 @@ pub mod types;
 pub use types::{ Sensor, Motor };
 
 pub mod dummy;
+
+pub mod error;

@@ -10,25 +10,23 @@ pub async fn read_and_weep(duration: std::time::Duration, address: std::net::Soc
         motor.add_nerve(&nid, {
             let now = chrono::Utc::now();
             let timestamp: chrono::DateTime<chrono::Utc> = now.into();
-            // TODO: Logging, errors
             print!("{} @ {}, ", &nid, timestamp.format("%M:%S.%9f"))
         })
     }
 
-    // TODO: Logging, errors
-    println!("Reading nerve activity at {} with {} signal paths",
+    log::info!("Reading nerve activity at {} with {} signal paths",
              motor.address, motor.nerves.len());
 
     let mut buffer = vec![0; 100];
     let start = std::time::Instant::now();
     while start.elapsed() < duration {
         if let Err(error) = motor.recv_impulse(&mut buffer).await {
-            println!("Whoops! Impulse not recognized\n{:?}", error)
+            // TODO Error type
+            log::warn!("Whoops! Impulse not recognized\n{:?}", error)
         }
     }
 
-    // TODO: Logging, errors
-    println!("Signal stream from {} read for {} seconds",
+    log::info!("Signal stream from {} read for {} seconds",
              motor.address, start.elapsed().as_secs());
 
     Ok(())

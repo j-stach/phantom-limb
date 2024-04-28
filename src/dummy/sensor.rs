@@ -20,7 +20,7 @@ pub async fn white_noise(duration: std::time::Duration, remote: SocketAddr, nids
 
     sensor.connect(&remote).await?;
     // TODO: Logging, errors
-    println!("Sending white noise from {} to {} with {} signal paths",
+    log::info!("Sending white noise from {} to {} with {} signal paths",
              sensor.address, &remote, count - 1);
 
     let mut sensory_environment = rand::thread_rng();
@@ -30,12 +30,12 @@ pub async fn white_noise(duration: std::time::Duration, remote: SocketAddr, nids
         let stimulus: u8 = sensory_environment.gen_range(0..count);
         if let Err(error) = sensor.send_impulse(&stimulus).await {
             // TODO: Logging, errors
-            println!("Whoops! Stimulus '{}' didn't send!\n{:?}", stimulus, error)
+            log::warn!("Whoops! Stimulus '{}' didn't send!\n{:?}", stimulus, error)
         }
     }
 
     // TODO: Logging, errors
-    println!("White noise from {} terminated after {} seconds",
+    log::info!("White noise from {} terminated after {} seconds",
              sensor.address, start.elapsed().as_secs());
     Ok(())
 }
