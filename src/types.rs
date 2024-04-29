@@ -4,8 +4,9 @@ use tokio::net::UdpSocket;
 use std::collections::HashMap;
 use std::hash::Hash;
 
-pub use cajal::neuron::NeuronId;
+// TODO: pub use cajal::neuron::NeuronId;
 
+pub use crate::id::NeuronId;
 
 /// Sends some data as a NeuronId to trigger a Complex's Inputs.
 /// The frequency of that data's occurrence should form a meaningful signal.
@@ -54,7 +55,7 @@ pub struct Sensor<T: Hash + Eq> {
 pub struct Motor {
     pub address: SocketAddr,
     pub socket: UdpSocket,
-    pub nerves: HashMap<NeuronId, ()>,
+    pub nerves: HashMap<NeuronId, ()>, // TODO Doesn't appear like this type is suitable here
 } impl Motor {
 
     /// Create a motor socket. Use port '0' to have the system assign a port.
@@ -69,7 +70,7 @@ pub struct Motor {
         Ok(motor)
     }
 
-    /// Maps a neurotransmission signal to a void function or closure to be executed.
+    /// Maps a neurotransmission signal to a process to be executed.
     pub fn add_nerve(&mut self, impulse: &NeuronId, behavior: ()) {
         self.nerves.insert(impulse.clone(), behavior);
     }
@@ -79,8 +80,8 @@ pub struct Motor {
         if let Ok(n_bytes) = self.socket.recv(buffer).await {
             let buff = &buffer[..n_bytes];
             let impulse: NeuronId = bincode::deserialize_from(buff)?;
-            if let Some(behavior) = self.nerves.get(&impulse) { *behavior }
+            if let Some(behavior) = self.nerves.get(&impulse) { return Ok(behavior.clone()) }
         }
-        Ok(())
+        Err(anyhow::anyhow!("Impulse not received, behavior not executed"))
     }
 }
