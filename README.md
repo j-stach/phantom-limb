@@ -43,5 +43,16 @@ Needless to say, commands can become rather verbose; `phantom-limb` is intended 
 `white-noise`     | Tests up to 256 paths by sending NeuronIds in a randomly-generated sequence.
 #### Motors
 `read-and-weep`   | Behavioral sink that prints activation sequence to STDOUT.
-
+### Example:
+Test phantom-limb by connecting a Sensor directly to a Motor and providing a single NeuronId for them to exchange:
+1. Open two terminals side by side.
+2. In the first, run:
+```
+$ phantom-limb read-and-weep 10 127.0.0.1:8080 Test/0.0/0.0
+```
+3. In the second, quickly run:
+```
+$ phantom-limb white-noise 5 127.0.0.1:8080 Test/0.0/0.0
+```
+4. This should result in `Test/0.0/0.0` being spammed to STDOUT for 5 seconds. Buckle up.
 
