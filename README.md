@@ -5,7 +5,7 @@
 This is a crate for simulating sensor inputs and reading behavioral outputs for bionic neural networks. <br>
 Use the CLI tool as an example reference for building signal interfaces for Cajal. <br>
 
-**NOTE: Crate is incomplete without Cajal and will not function until Cajal is also released.** 
+**NOTE: Crate is incomplete without Cajal and will not be useful until Cajal is also released.**
 ## phantom_limb
 A library with types for creating Sensor and Motor interfaces for Cajal BNNs. <br>
 ```
@@ -44,7 +44,7 @@ Needless to say, commands can become rather verbose; `phantom-limb` is intended 
 #### Motors
 `read-and-weep`   | Behavioral sink that prints activation sequence to STDOUT.
 ### Example:
-Test phantom-limb by connecting a Sensor directly to a Motor and providing a single NeuronId for them to exchange:
+Test phantom-limb by connecting a Sensor directly to a Motor. Start by providing a single NeuronId for them to exchange:
 1. Open two terminals side by side.
 2. In the first, run:
 ```
@@ -54,5 +54,7 @@ $ phantom-limb read-and-weep 10 127.0.0.1:8080 Test/0.0/0.0
 ```
 $ phantom-limb white-noise 5 127.0.0.1:8080 Test/0.0/0.0
 ```
-4. This should result in `Test/0.0/0.0` being spammed to STDOUT for 5 seconds. Buckle up.
+4. You will see `Test/0.0/0.0` spammed to STDOUT for 5 seconds. Buckle up.
+
+## TODO
 

@@ -3,7 +3,7 @@ use serde::{ Serialize, Deserialize };
 
 
 /// Unique identifier for neurons, containing information about its location.
-#[derive(Clone, Serialize, Deserialize, Eq, PartialEq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Eq, PartialEq, Hash)]
 pub struct NeuronId {
     /// The name of the enclosing structure.
     pub structure: String,

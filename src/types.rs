@@ -10,11 +10,11 @@ pub use crate::id::NeuronId;
 
 /// Sends some data as a NeuronId to trigger a Complex's Inputs.
 /// The frequency of that data's occurrence should form a meaningful signal.
-pub struct Sensor<T: Hash + Eq> {
+pub struct Sensor<Q: Hash + Eq> {
     pub address: SocketAddr,
     pub socket: UdpSocket,
-    pub spectrum: HashMap<T, NeuronId>,
-} impl<T: Hash + Eq> Sensor<T> {
+    pub spectrum: HashMap<Q, NeuronId>,
+} impl<Q: Hash + Eq> Sensor<Q> {
 
     /// Create a sensor socket. Use port '0' to have the system assign a port.
     /// The socket address will be recorded in the address field.
@@ -29,7 +29,7 @@ pub struct Sensor<T: Hash + Eq> {
     }
 
     /// Maps a sensory bit to a new NeuronId.
-    pub fn add_receptor(&mut self, quantum: T, nid: NeuronId) {
+    pub fn add_receptor(&mut self, quantum: Q, nid: NeuronId) {
         self.spectrum.insert(quantum, nid);
     }
 
@@ -41,7 +41,7 @@ pub struct Sensor<T: Hash + Eq> {
     }
 
     /// Attempts to send a sensory datum as a neurotransmission impulse.
-    pub async fn send_impulse(&self, quantum: &T) -> Result<(), anyhow::Error> {
+    pub async fn send_impulse(&self, quantum: &Q) -> Result<(), anyhow::Error> {
         if let Some(nid) = self.spectrum.get(quantum) {
             let nid = bincode::serialize(nid)?;
             self.socket.send(&nid).await?;
@@ -52,11 +52,12 @@ pub struct Sensor<T: Hash + Eq> {
 
 /// Handles the behavioral output of a bionic neural network made with cajal.
 /// When it receives a NeuronId, it executes the corresponding function.
-pub struct Motor {
+pub struct Motor<B: Fn(A) -> R, A, R> {
     pub address: SocketAddr,
     pub socket: UdpSocket,
-    pub nerves: HashMap<NeuronId, ()>, // TODO Doesn't appear like this type is suitable here
-} impl Motor {
+    pub nerves: HashMap<NeuronId, B>,
+    phantom_data: std::marker::PhantomData<(A, R)>
+} impl<B: Fn(A) -> R, A, R> Motor<B, A, R> {
 
     /// Create a motor socket. Use port '0' to have the system assign a port.
     /// The socket address will be recorded in the address field.
@@ -64,23 +65,25 @@ pub struct Motor {
         let mut motor = Motor {
             address,
             socket: UdpSocket::bind(address).await?,
-            nerves: HashMap::new()
+            nerves: HashMap::new(),
+            phantom_data: std::marker::PhantomData
         };
         motor.address = motor.socket.local_addr()?;
         Ok(motor)
     }
 
     /// Maps a neurotransmission signal to a process to be executed.
-    pub fn add_nerve(&mut self, impulse: &NeuronId, behavior: ()) {
+    pub fn add_nerve(&mut self, impulse: &NeuronId, behavior: B) {
         self.nerves.insert(impulse.clone(), behavior);
     }
 
     /// Receives NeuronId messages and executes the corresponding function or closure.
-    pub async fn recv_impulse(&self, buffer: &mut [u8]) -> Result<(), anyhow::Error> {
+    pub async fn recv_impulse(&self, buffer: &mut [u8], args: A) -> Result<R, anyhow::Error> {
         if let Ok(n_bytes) = self.socket.recv(buffer).await {
             let buff = &buffer[..n_bytes];
             let impulse: NeuronId = bincode::deserialize_from(buff)?;
-            if let Some(behavior) = self.nerves.get(&impulse) { return Ok(behavior.clone()) }
+            if let Some(behavior) = self.nerves.get(&impulse) { return Ok(behavior(args)) }
+            else { println!("Impulse '{}' not recognized", impulse) }
         }
         Err(anyhow::anyhow!("Impulse not received, behavior not executed"))
     }

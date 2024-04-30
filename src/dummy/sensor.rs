@@ -9,42 +9,34 @@ use crate::types::{ Sensor, NeuronId };
 // TODO: Logging, errors
 pub async fn white_noise(duration: std::time::Duration, remote: SocketAddr, nids: Vec<NeuronId>)
 -> Result<(), anyhow::Error> {
-    env_logger::init();
     let ip = "127.0.0.1".parse::<std::net::IpAddr>().expect("Parse localhost address");
 
-println!("A");
     let mut sensor = Sensor::<u8>::new(SocketAddr::new(ip, 0)).await?;
     let mut count = 0u8;
     for nid in nids {
         sensor.add_receptor(count, nid);
         count += 1
     }
-println!("B");
 
     sensor.connect(&remote).await?;
-println!("C");
     // TODO: Logging, errors
-    log::info!("Sending white noise from {} to {} with {} signal paths",
-             sensor.address, &remote, count - 1);
+    println!("Sending white noise from {} to {} with {} signal paths",
+             sensor.address, &remote, count);
 
     let mut sensory_environment = rand::thread_rng();
     let start = std::time::Instant::now();
 
-println!("D");
     while start.elapsed() < duration {
-println!("E");
         let stimulus: u8 = sensory_environment.gen_range(0..count);
-println!("F");
         if let Err(error) = sensor.send_impulse(&stimulus).await {
             // TODO: Logging, errors
-            log::warn!("Whoops! Stimulus '{}' didn't send!\n{:?}", stimulus, error)
+            println!("Whoops! Stimulus '{}' didn't send! {:?}", stimulus, error)
         }
     }
 
     // TODO: Logging, errors
-    log::info!("White noise from {} terminated after {} seconds",
+    println!("White noise from {} terminated after {} seconds",
              sensor.address, start.elapsed().as_secs());
-println!("G");
     Ok(())
 }
 
