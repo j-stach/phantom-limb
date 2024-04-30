@@ -11,7 +11,7 @@ In `duration` specify the number of seconds (u64) for which to run the dummy.
 If the dummy is a sensor, `socket_address` is the IPv6 address of the remote target.
 For a motor, it is the address of the socket for receiving the neurotransmission signal.
 List one or more `neuron_id` for the dummy sensor/motor to transmit/handle, respectively.
-(See cajal::neuron::soma::NeuronId)
+For reference, the expected pattern for a NeuronId is `(\w+)/(\d+):(\d+)/(\d+):(\d+)`.
 
 SENSORS:
 white-noise     Tests up to 256 paths by sending randomly-generated signal data.
