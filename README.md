@@ -14,7 +14,7 @@ cargo add phantom_limb
 `Sensor` types provide an interface for environmental stimuli to be converted into neurotransmission signals.
 These can be set up to accomodate a variety of data types, but rely on a frequency-of-occurence model to determine
 the relevance of a data pattern. <br> See [TBD](https://cajal.io/theory/signals) for more info. <br>
-`Motor` types receive behavioral (ouput) signal impulses in the form of NeuronIds, translating them into some practical action.
+`Motor` types receive behavioral (ouput) signal impulses in the form of `NeuronId`s, translating them into some practical action.
 These serve the same role as nerve endings that drive gland and muscle activity in living animals. <br>
 
 ## phantom-limb
