@@ -1,4 +1,4 @@
-# Phantom Limb (WIP)
+# Phantom Limb
 *"So we just skirt the hallway sides, a phantom and a fly; <br> Follow the lines and wonder why there's no connection."* <br>
 &emsp;-- The Shins
 
