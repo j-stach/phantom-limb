@@ -54,7 +54,10 @@ $ phantom-limb read-and-weep 10 127.0.0.1:8080 Test/0.0/0.0
 ```
 $ phantom-limb white-noise 5 127.0.0.1:8080 Test/0.0/0.0
 ```
-4. You will see `Test/0.0/0.0` spammed to STDOUT for 5 seconds. Buckle up.
+4. You will see "Test/0.0/0.0" spammed to STDOUT for 5 seconds. Buckle up.
 
 ## TODO
+- [ ] More "dummy" mocks
+- [ ] Error types and logging for lib
+- [ ] Expanded capabilities for Motor & Sensor
 
