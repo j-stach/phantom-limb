@@ -1,5 +1,6 @@
 [package]
 name = "phantom-limb"
+authors = ["j-stach"]
 description = "Sense and motor signal handlers for integrating with Cajal"
 version = "0.0.1"
 edition = "2021"
