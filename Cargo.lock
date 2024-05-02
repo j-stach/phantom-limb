@@ -27,6 +27,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "anal-eyes"
+version = "0.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "124cfd7a9bbe43576c4c156779b6423e7c36fb046305604275a2dc1d2ea952b1"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "android-tzdata"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -329,6 +340,7 @@ checksum = "3fdb12b2476b595f9358c5161aa467c2438859caa136dec86c26fdd2efe17b92"
 name = "phantom-limb"
 version = "0.0.1"
 dependencies = [
+ "anal-eyes",
  "anyhow",
  "bincode",
  "chrono",
