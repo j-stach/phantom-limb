@@ -4,9 +4,7 @@ use tokio::net::UdpSocket;
 use std::collections::HashMap;
 use std::hash::Hash;
 
-// TODO: pub use cajal::neuron::NeuronId;
-
-pub use crate::id::NeuronId;
+pub use crate::NeuronId;
 
 /// Sends some data as a NeuronId to trigger a Complex's Inputs.
 /// The frequency of that data's occurrence should form a meaningful signal.

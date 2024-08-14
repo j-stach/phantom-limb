@@ -3,8 +3,7 @@ use std::collections::VecDeque;
 use std::net::SocketAddr;
 use std::time::Duration;
 
-// TODO: use cajal::neuron::NeuronId;
-use phantom_limb::id::NeuronId;
+use phantom_limb::NeuronId;
 use phantom_limb::dummy::{ sensor::white_noise, motor::read_and_weep };
 use phantom_limb::error;
 
