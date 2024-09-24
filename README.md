@@ -1,9 +1,9 @@
 # Phantom Limb
-*"So we just skirt the hallway sides, a phantom and a fly; <br> Follow the lines and wonder why there's no connection."* <br>
-&emsp;-- The Shins
+> *"So we just skirt the hallway sides, a phantom and a fly; <br> Follow the lines and wonder why there's no connection."* <br>
+> -- The Shins
 
 This is a crate for simulating sensor inputs and reading behavioral outputs for bionic neural networks. <br>
-Use the CLI tool as an example reference for building signal interfaces for Cajal. <br>
+Use the [CLI tool](https://github.com/j-stach/phantom-limb/blob/main/src/dummy/) as a reference for building signal interfaces for Cajal. <br>
 
 **NOTE: Crate is incomplete without Cajal and will not be useful until Cajal is also released.**
 ## phantom_limb
@@ -14,7 +14,7 @@ cargo add phantom_limb
 `Sensor` types provide an interface for environmental stimuli to be converted into neurotransmission signals.
 These can be set up to accomodate a variety of data types, but rely on a frequency-of-occurence model to determine
 the relevance of a data pattern. <br> See [TBD](https://cajal.io/theory/signals) for more info. <br>
-`Motor` types receive behavioral (ouput) signal impulses in the form of `NeuronId`s, translating them into some practical action.
+`Motor` types receive behavioral (ouput) signal impulses in the form of `NeuronId`, translating them into some practical action.
 These serve the same role as nerve endings that drive gland and muscle activity in living animals. <br>
 
 ## phantom-limb
@@ -44,7 +44,7 @@ Needless to say, commands can become rather verbose; `phantom-limb` is intended 
 #### Motors
 `read-and-weep`   | Behavioral sink that prints activation sequence to STDOUT.
 ### Example:
-Test phantom-limb by connecting a Sensor directly to a Motor. Start by providing a single NeuronId for them to exchange:
+Test phantom-limb by connecting a Sensor directly to a Motor. Provide a single NeuronId for them to exchange:
 1. Open two terminals side by side.
 2. In the first, run:
 ```
@@ -54,7 +54,7 @@ $ phantom-limb read-and-weep 10 127.0.0.1:8080 Test/0.0/0.0
 ```
 $ phantom-limb white-noise 5 127.0.0.1:8080 Test/0.0/0.0
 ```
-4. You will see `Test/0.0/0.0` spammed to STDOUT for 5 seconds. Buckle up.
+4. This will print a stream of `Test/0.0/0.0` impulses lasting 5 seconds. Buckle up.
 
 
 
