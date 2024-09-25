@@ -7,15 +7,14 @@ This is a crate for simulating sensor inputs and reading behavioral outputs for 
 - Use the [CLI tool](https://github.com/j-stach/phantom-limb/blob/main/src/dummy/) as a reference for building signal interfaces for Cajal. <br>
 - See [PongLand](https://github.com/j-stach/pongland/) for a more complete example of Phantom Limb in action.
 
-**NOTE: Crate is incomplete without Cajal and will not be useful until Cajal is also released.**
 ## phantom_limb
 A library with generic types for creating Sensor and Motor interfaces for spiking networks. <br>
 ```
 cargo add phantom_limb
 ```
-`Sensor` types provide an interface for environmental stimuli to be converted into neurotransmission signals.
+- `Sensor` types provide an interface for environmental stimuli to be converted into neurotransmission signals.
 These can be used to convert a variety of data types into the frequency-of-occurence model that Cajal uses.<br> 
-`Motor` types receive behavioral (ouput) signal impulses in the form of `NeuronId`, translating them into some practical action.
+- `Motor` types receive behavioral (ouput) signal impulses in the form of `NeuronId`, translating them into some practical action.
 These serve the same role as nerve endings that drive gland and muscle activity in living animals. <br>
 
 ## phantom-limb
