@@ -4,7 +4,7 @@ use tokio::net::UdpSocket;
 use std::collections::HashMap;
 use std::hash::Hash;
 
-pub use crate::NeuronId;
+pub use super::NeuronId;
 
 
 /// Sends some data as a NeuronId to trigger a Complex's Inputs.

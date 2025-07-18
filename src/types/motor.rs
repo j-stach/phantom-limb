@@ -3,7 +3,7 @@ use std::net::SocketAddr;
 use tokio::net::UdpSocket;
 use std::collections::HashMap;
 
-pub use crate::NeuronId;
+pub use super::NeuronId;
 
 
 /// Handles the behavioral output of a bionic neural network made with cajal.
