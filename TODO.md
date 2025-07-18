@@ -5,7 +5,6 @@
 - [ ] Macros for ease-of-use with type signatures
 
 ### Docs & Examples
-- [x] Update `README.md`
 - [ ] Old examples updated
 - [ ] Simple retina
 - [ ] Simple wheel
