@@ -2,9 +2,8 @@
 > *"So we just skirt the hallway sides, a phantom and a fly; <br> Follow the lines and wonder why there's no connection."* <br>
 > -- The Shins
 
-A library with generic types for `Sensor` and `Motor` interfaces 
-    to and from spiking networks 
-    built with the [Cajal framework](https://github.com/j-stach/cajal). <br>
+A library with generic `Sensor` and `Motor` interfaces for spiking networks 
+    built using the [Cajal](https://github.com/j-stach/cajal) framework. <br>
 
 ## Use
 ```
